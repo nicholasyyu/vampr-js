@@ -12,7 +12,7 @@ class Vampire {
   addOffspring(vampire) {
 
     this.offspring.push(vampire);
-    offspring.creator = this;
+    vampire.creator = this;
 
   }
 
@@ -29,8 +29,8 @@ class Vampire {
     let numberOfVampiresFromOriginal = 0;
     let currentVampire = this;
 
-    while (currentEmployee.boss) {
-      currentVampire = currentVampire.boss;
+    while (currentVampire.creator) {
+      currentVampire = currentVampire.creator;
       numberOfVampiresFromOriginal++;
     }
 
@@ -40,7 +40,11 @@ class Vampire {
 
   // Returns true if this vampire is more senior than the other vampire. (Who is closer to the original vampire)
   isMoreSeniorThan(vampire) {
-
+    if(this.numberOfVampiresFromOriginal >= vampire.numberOfVampiresFromOriginal){
+      return false;
+    } else {
+      return true;
+    }
   }
 
   /** Stretch **/
@@ -57,3 +61,10 @@ class Vampire {
 
 module.exports = Vampire;
 
+// const rootVampire = new Vampire("root");
+// const offspring1 = new Vampire("andrew");
+// const offspring2 = new Vampire("sarah");
+// rootVampire.addOffspring(offspring1);
+// rootVampire.addOffspring(offspring2);
+
+// console.log(offspring1.isMoreSeniorThan(offspring2));
